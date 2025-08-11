@@ -7,6 +7,13 @@ La app está desplegada en [Render](https://render.com/) y utiliza HTML, CSS y J
 
 [![Abrir Demo](https://img.shields.io/badge/Login%20Demo-Click%20Aquí-blue?style=for-the-badge)](https://prueba-tecnica-sistema-login.onrender.com/static/login.html)
 
+## 🧪 Usuarios de prueba de Demo en Linea
+
+| Usuario   | Contraseña  | Rol / Notas |
+|-----------|-------------|-------------|
+| admin     | adminpass   | Administrador |
+| super1    | superpass   | Supervisor |
+| usuario1  | userpass    | Usuario estándar |
 
 ## 🚀 Características
 
