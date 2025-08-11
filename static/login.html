@@ -43,6 +43,15 @@
             // Prevenir que el formulario se envíe de forma tradicional (recarga de página)
             e.preventDefault();
 
+            // Ocultar mensajes de error anteriores
+            $("#errorMsg").text("");
+    
+            // Mostrar mensaje de cargando
+            $("#errorMsg").css("color", "white").text("Cargando...");
+    
+            // Deshabilitar el botón mientras se procesa
+            $("button").prop("disabled", true).text("Entrando...");
+
             // Enviar datos por AJAX al backend para validar credenciales
             $.ajax({
                 url: "/api/login",           // Endpoint del login en el backend
@@ -65,3 +74,4 @@
     </script>
 </body>
 </html>
+
