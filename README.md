@@ -1,4 +1,4 @@
-# 📌 Proyecto de Gestión con Litestar
+# 📌 Proyecto de Sistema de Login con Litestar
 
 Aplicación web construida con [Litestar](https://litestar.dev/) que incluye un sistema de autenticación de usuarios y panel de administración con tablas de datos.  
 La app está desplegada en [Render](https://render.com/) y utiliza HTML, CSS y JavaScript para la parte de frontend.
