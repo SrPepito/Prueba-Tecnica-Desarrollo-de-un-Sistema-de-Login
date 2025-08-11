@@ -39,6 +39,11 @@ La app está desplegada en [Render](https://render.com/) y utiliza HTML, CSS y J
    SESSION_SECRET=clave_secreta
    ENV=dev
 
-5. **Para ejecutar en local**
+5. **Registrar usuarios**
    ```bash
+   python create_users.py
+
+6. **Para ejecutar en local**
+   ```bash
+   python
    uvicorn app.main:app --reload
