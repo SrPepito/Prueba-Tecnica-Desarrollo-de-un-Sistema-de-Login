@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración básica del documento -->
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <!-- Enlace a la hoja de estilos CSS personalizada para la página de login -->
+    <link rel="stylesheet" href="./styles/login.css">
+
+    <!-- Carga de jQuery para facilitar la manipulación del DOM y manejo de eventos -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Contenedor principal para centrar y organizar el formulario -->
+    <div class="container">
+        <!-- Título de la página -->
+        <h1>Iniciar Sesión</h1>
+
+        <!-- Formulario de login -->
+        <form id="loginForm">
+            <!-- Etiqueta para el campo usuario -->
+            <label>Usuario:</label>
+            <!-- Input para ingresar el nombre de usuario, campo obligatorio -->
+            <input type="text" id="username" name="username" required>
+
+            <!-- Etiqueta para el campo contraseña -->
+            <label>Contraseña:</label>
+            <!-- Input para ingresar la contraseña, tipo password para ocultar texto -->
+            <input type="password" id="password" name="password" required>
+
+            <!-- Botón para enviar el formulario -->
+            <button type="submit">Entrar</button>
+        </form>
+
+        <!-- Contenedor para mostrar mensajes de error (por ejemplo, credenciales incorrectas) -->
+        <div class="error" id="errorMsg"></div>
+    </div>
+
+    <script>
+        // Manejar evento submit del formulario login
+        $("#loginForm").on("submit", function(e) {
+            // Prevenir que el formulario se envíe de forma tradicional (recarga de página)
+            e.preventDefault();
+
+            // Enviar datos por AJAX al backend para validar credenciales
+            $.ajax({
+                url: "/api/login",           // Endpoint del login en el backend
+                method: "POST",              // Método HTTP POST
+                contentType: "application/json", // Tipo de contenido JSON
+                data: JSON.stringify({       // Convertir a JSON los datos del formulario
+                    username: $("#username").val(),
+                    password: $("#password").val()
+                }),
+                success: function() {
+                    // Si login es exitoso, redirigir a la página principal del panel
+                    window.location.href = "/static/app.html";
+                },
+                error: function(xhr) {
+                    // Si hay error (credenciales inválidas, etc.), mostrar mensaje en pantalla
+                    $("#errorMsg").text(xhr.responseJSON?.error || "Error al iniciar sesión");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

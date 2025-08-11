@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración básica del documento -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Panel de Usuarios</title>
+
+    <!-- Tu CSS personalizado para estilos propios, ubicado en la carpeta static/styles/ -->
+    <link rel="stylesheet" href="styles/app.css">
+
+    <!-- Bootstrap 5 CSS para estilos y componentes responsivos -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- DataTables con integración para Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+</head>
+<body>
+    <!-- Contenedor principal con margen automático y padding -->
+    <div class="container">
+        <!-- Header del panel con título y acciones -->
+        <div class="header d-flex justify-content-between align-items-center my-3">
+            <h2>Panel de Usuarios</h2>
+            <div class="header-actions">
+                <!-- Enlace para redirigir, puedes cambiar la URL según convenga -->
+                <a href="/static/app.html" class="me-3">Redirigir</a>
+
+                <!-- Botón para cerrar sesión -->
+                <button id="logoutBtn" class="btn btn-outline-primary">Cerrar sesión</button>
+            </div>
+        </div>
+
+        <!-- Elemento donde se mostrará información del usuario autenticado -->
+        <div id="userInfo" class="mb-3" role="status"></div>
+
+        <!-- Tarjeta para la tabla de usuarios -->
+        <div class="table-card">
+            <!-- Tabla para mostrar los usuarios, con clases Bootstrap para estilo -->
+            <table id="usersTable" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                    </tr>
+                </thead>
+                <tbody></tbody> <!-- Aquí se insertan dinámicamente las filas -->
+            </table>
+        </div>
+    </div>
+
+    <!-- Carga de scripts externos en orden correcto -->
+    <!-- jQuery necesario para DataTables y manipulación DOM -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables principal -->
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+
+    <!-- DataTables integración con Bootstrap 5 -->
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- Bootstrap 5 bundle con Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script principal para manejar la lógica de la página -->
+    <script>
+        // Función para devolver un badge coloreado según el rol del usuario
+        function getRoleBadge(role) {
+            // Mapeo rol => clase Bootstrap para color
+            const colors = { admin: "danger", supervisor: "primary", usuario: "success" };
+            // Devuelve un span con la clase y texto del rol
+            return `<span class="badge bg-${colors[role] || 'secondary'} badge-role">${role}</span>`;
+        }
+
+        // Petición para obtener datos del usuario autenticado
+        $.get("/api/me", function(user) {
+            // Mostrar mensaje de bienvenida con nombre y rol
+            $("#userInfo").text(`Bienvenido, ${user.nombre} (${user.role})`);
+        }).fail(function() {
+            // Si falla (no autenticado), redirigir a login
+            window.location.href = "/static/login.html";
+        });
+
+        // Petición para obtener la lista de usuarios según el rol
+        $.get("/api/users", function(users) {
+            let rows = "";
+            // Por cada usuario, crear una fila con sus datos
+            users.forEach(function(u) {
+                rows += `
+                    <tr>
+                        <td>${u.nombre}</td>
+                        <td>${u.username}</td>
+                        <td>${u.email}</td>
+                        <td>${getRoleBadge(u.role)}</td>
+                    </tr>
+                `;
+            });
+            // Insertar las filas dentro del tbody de la tabla
+            $("#usersTable tbody").html(rows);
+
+            // Inicializar DataTables con opciones específicas
+            $("#usersTable").DataTable({
+                pageLength: 5, // Mostrar 5 filas por página
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json" // Traducción al español
+                },
+                responsive: true, // Adaptar la tabla a dispositivos móviles
+            });
+        }).fail(function() {
+            // Si falla (ej: sesión expirada), redirigir a login
+            window.location.href = "/static/login.html";
+        });
+
+        // Evento click para el botón de cerrar sesión
+        $("#logoutBtn").click(function() {
+            // Enviar petición POST para logout
+            $.post("/api/logout", function() {
+                // Redirigir a página de login después de cerrar sesión
+                window.location.href = "/static/login.html";
+            });
+        });
+    </script>
+</body>
+</html>

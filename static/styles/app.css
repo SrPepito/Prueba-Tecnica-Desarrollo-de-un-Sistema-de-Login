@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #000 !important;
+    color: #f6f6f6 !important;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 15px 20px;
+    border-radius: 8px;
+}
+
+.header h2 {
+    font-family: "Krona One", sans-serif;
+    color: #22D4FD;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.header a {
+    color: #22D4FD;
+    text-decoration: none;
+}
+
+.header a:hover {
+    text-decoration: underline;
+}
+
+#logoutBtn {
+    background-color: #22D4FD;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+#logoutBtn:hover {
+    background-color: #12677a;
+}
+
+#userInfo {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: #f6f6f6;
+}
+
+.table {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #f6f6f6;
+}
+
+.table thead {
+    background-color: #22D4FD;
+    color: #000;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.table-bordered {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.badge-role {
+    font-size: 0.85em;
+    padding: 5px 8px;
+}

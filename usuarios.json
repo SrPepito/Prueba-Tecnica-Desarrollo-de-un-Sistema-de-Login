@@ -1,0 +1,26 @@
+[
+  {
+    "id": "d55b09a0-a731-40f0-9c7b-133417b44af4",
+    "username": "admin",
+    "password": "$2b$12$cQule7OXcUGhhPde0apwUO.dfWj8UKh3auAWKYiGGjR5nx6P5dHLG",
+    "nombre": "Administrador",
+    "email": "admin@ejemplo.com",
+    "role": "admin"
+  },
+  {
+    "id": "becfcbdc-e9c7-40f9-b748-6f2fd3396019",
+    "username": "super1",
+    "password": "$2b$12$mpgN6QSWdhK7xents/elWuIv5l9ZqbJXfOLbpDJ3xz7/lDzCMqTK6",
+    "nombre": "Supervisor Uno",
+    "email": "super1@ejemplo.com",
+    "role": "supervisor"
+  },
+  {
+    "id": "22a52f10-b33d-4b72-9163-99a8e915e206",
+    "username": "usuario1",
+    "password": "$2b$12$BjexpkSqxn6jWNAnu0rqD.e3IsVToc5Ws4PV0Pbbs7SoFw6yscNAC",
+    "nombre": "Usuario Uno",
+    "email": "user1@ejemplo.com",
+    "role": "usuario"
+  }
+]
